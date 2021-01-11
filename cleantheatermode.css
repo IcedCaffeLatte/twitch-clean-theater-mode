@@ -1,0 +1,238 @@
+.tw-root--theme-dark {
+    --color-text-base: #FFFFFF;
+    --color-text-alt: #FFFFFF;
+}
+/*--새 메시지 도착 애니메이션--*/
+@keyframes newMessage {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+        line-height: 1.3em;
+    }
+    to {
+        will-change: transform;
+        opacity: 1;
+        transform: translateX(0px);
+        line-height: 1.3em;
+    }
+}
+.chat-line__message:not(.special-message),
+.vod-message:not(.special-message) {
+    color: inherit;
+    position: relative;
+    box-sizing: border-box;
+    opacity: 1;
+    animation: newMessage 200ms forwards;
+}
+/*--채팅창 투명화 (right-column--theatre: <= 극장 모드)--*/
+.tw-root--theme-dark .channel-root__right-column {
+    background: transparent;
+}
+.tw-root--theme-dark .right-column--theatre .chat-room {
+    background: transparent!important;
+}
+.tw-root--theme-dark .right-column--theatre.right-column--beside .channel-root__right-column > .tw-c-background-base {
+    background-color: transparent!important;
+}
+.tw-root--theme-dark .right-column--theatre .tw-border-l {
+    border-left: 1px solid transparent!important;
+}
+/*채팅방 배경있는 채팅 불투명하게*/
+.chat-scrollable-area__message-container > .tw-c-background-alt{
+    background-color: transparent!important;
+}
+/*하단여백*/
+.video-player__container--theatre-whispers {
+    bottom: 0rem;
+}
+/*플레이어 전체로 확장*/
+.persistent-player.persistent-player--theatre {
+    width: 100%!important;
+}
+/*플레이어 왼쪽 정렬과 가득채우기*/
+div.video-player div.video-player__container--theatre video {
+    max-height: 100%!important;
+    max-width: 100%;
+    width: auto;
+    height: 100%!important;
+    position: absolute;
+}
+
+/*--극장 모드에서 플레이어 내부 우측 여백 생기게 하기--*/
+.video-player__container--theatre-whispers div[data-a-target="player-controls"],
+.video-player__container--theatre-whispers .top-bar {
+    padding-right: 335px!important;
+}
+.video-player__container--theatre-whispers .player-overlay-background-sidebar {
+    width: calc(320px + 335px);
+    padding-right: 335px!important;
+}
+.video-player__container--theatre-whispers .player-overlay-background > .tw-mg-r-2 {
+    margin-right: 360px!important;
+}
+/*채널 목록 너비*/
+.side-nav {
+    width: 20rem;
+}
+/*--채팅창 관련 숨기기--*/
+/*로그인 아이디*/
+.chat-author__intl-login,
+/*VOD에서 나의 로그인 아이디*/
+.chat-author__intl-login--highlighted,
+/*리더보드*/
+.channel-leaderboard {
+    display: none;
+}
+/*VOD 채팅방 상단*/
+.right-column--theatre .video-chat__header {
+    display: none!important;
+}
+/*LIVE 채팅방 타임스탬프*/
+span.chat-line__timestamp {
+    display: flex;
+    height: 0px!important;
+    font-size: 13px;
+}
+/*--채팅 내용 내부--*/
+.tw-root--theme-dark .right-column--theatre .chat-scrollable-area__message-container,
+.tw-root--theme-dark .right-column--theatre .qa-vod-chat{
+    text-shadow:  1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000,  2px 2px 2px #000;
+}
+.chat-line__message,
+.chat-line__status,
+.vod-message {
+    text-align: right;
+    font-size: 19px;
+}
+/*--채팅 강조하기--*/
+.chat-line__message-body--highlighted {
+    border: 0px;
+}
+.channel-points-icon {
+    height: 1.5rem;
+}
+.user-notice-line .tw-mg-t-05 {
+    margin-top: -1rem!important;
+}
+.user-notice-line.tw-pd-y-05 {
+    padding-bottom: .1rem!important;
+    padding-top: .1rem!important;
+}
+/*--vod 타임 스탬프--*/
+.vod-message__header{
+    width:0px;
+    height:0px;
+}
+.right-column--theatre .vod-message__header {
+    display: none!important;
+}
+/*벳지 여백*/
+.chat-badge {
+    margin-bottom: 0rem;
+}
+/*이모티콘*/
+.chat-line__message--emote,
+.chat-line__message--emote-button {
+    margin: 0 0 5px 0;
+}
+/*채팅 내용*/
+.text-fragment {
+    font-weight: bold;
+    line-height: 1.25em;
+}
+/*채팅 간격*/
+.chat-line__message,
+.chat-line__moderation,
+.chat-line__status {
+    padding: .2rem 2rem .2rem 1rem;
+}
+/*닉네임*/
+.chat-author__display-name,
+.chat-author__intl-login {
+    font-size: 15px;
+    line-height: 1.5em;
+}
+/*ID와 채팅 사이 줄 바꾸기*/
+.vod-message .video-chat__message .tw-pd-r-05::after,
+.chat-line__no-background > span[data-test-selector="chat-message-separator"]::after {
+    white-space: pre;
+    font-size: 0px;
+    content: "\A";
+}
+.vod-message .video-chat__message .tw-pd-r-05,
+.chat-line__no-background > span[data-test-selector="chat-message-separator"]{
+    font-size: 0px;
+    line-height: 1em;
+}
+/*누가 나 부름*/
+.right-column--theatre .mention-fragment--recipient {
+    text-shadow: none;
+}
+/*----툴팁 관련----*/
+.tw-tooltip {
+    text-shadow: none;
+    color: var(--color-text-tooltip);
+}
+/*LIVE 배지 툴팁*/
+div.tw-tooltip__container[data-a-target="chat-badge"] > .tw-tooltip,
+/*VOD 배지 툴팁*/
+div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0.1rem!important;
+}
+/*LIVE 배지 툴팁:after*/
+div.tw-tooltip__container[data-a-target="chat-badge"] > .tw-tooltip:after,
+/*VOD 배지 툴팁:after*/
+div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip:after {
+    left: 47%;
+}
+/*생방송 채팅창 상단*/
+.right-column--theatre .stream-chat-header {
+    height: 30px !important;
+    background-color: transparent!important;
+}
+/*채팅창 보이기 토글 버튼*/
+.right-column--theatre .right-column__toggle-visibility {
+    top: 0rem;
+}
+/*--채팅창 입력 칸--*/
+.tw-root--theme-dark .chat-input .tw-textarea {
+    background-color: rgba(25, 23, 28, 0.4) !important;
+    font-size: 14px !important;
+    padding-bottom: 0.4rem !important;
+    padding-left: 3.1rem !important;
+    padding-top: 0.4rem !important;
+    padding-right: 0.7rem !important;
+}
+.chat-room .tw-pd-x-2{
+    padding-left: 1rem!important;
+    padding-right: 1rem!important;
+}
+.chat-room .tw-pd-b-2 {
+    padding-bottom: 1rem!important;
+}
+.chat-input .tw-mg-t-1{
+    margin-top: .5rem!important;
+}
+div.chat-input.tw-block.tw-pd-b-1.tw-pd-x-1.nc-dark{
+    padding-bottom: 0.6rem!important;
+}
+/*채팅 입력칸 버튼 하단으로*/
+div.chat-input div.tw-absolute.tw-bottom-0.tw-right-0{
+    right: 100px!important;
+    bottom: -40px!important;
+}
+/*채팅 아이디 창*/
+.chat-input__badge-carousel .tw-balloon{
+    margin-right: 3.5rem!important;
+}
+.chat-input__badge-carousel {
+    padding-left: .3rem;
+    padding-top: .2rem;
+}
+/*세로로 유 튜 브 트 위 터, 투 표 수정*/
+.custom-prediction-button__interactive,
+.social-media-link-overflow{
+    width: max-content;
+}
