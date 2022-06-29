@@ -2,22 +2,48 @@
     --color-text-base: #FFFFFF;
     --color-text-alt: #FFFFFF;
 }
+.font-scale--small {
+    --font-size-text: 1.5rem;
+    --font-size-id: 1.3rem;
+    --margin-emote: -0.18rem;
+    line-height: 1.3;
+}
+.font-scale--default {
+    --font-size-text: 1.9rem;
+    --font-size-id: 1.5rem;
+    --margin-emote: -0.24rem;
+    line-height: 1.3;
+}
+.font-scale--bigger {
+    --font-size-text: 2.2rem;
+    --font-size-id: 1.7rem;
+    --margin-emote: -0.26rem;
+    line-height: 1.3;
+}
+.font-scale--biggest {
+    --font-size-text: 2.4rem;
+    --font-size-id: 1.9rem;
+    --margin-emote: -0.28rem;
+    line-height: 1.3;
+}
+
 /*--새 메시지 도착 애니메이션--*/
 @keyframes newMessage {
     from {
         opacity: 0;
-        transform: translateX(20px);
-        line-height: 1.3em;
+        transform: translateX(25px);
+        max-height: 0%;
     }
     to {
         will-change: transform;
         opacity: 1;
         transform: translateX(0px);
-        line-height: 1.3em;
+        max-height: 100%;
     }
 }
 .chat-line__message:not(.special-message),
-.vod-message:not(.special-message) {
+.vod-message:not(.special-message),
+.user-notice-line:not(.special-message) {
     color: inherit;
     position: relative;
     box-sizing: border-box;
@@ -31,44 +57,51 @@
 .tw-root--theme-dark .right-column--theatre .chat-room {
     background: transparent!important;
 }
-.tw-root--theme-dark .right-column--theatre.right-column--beside .channel-root__right-column > .tw-c-background-base {
+.tw-root--theme-dark .right-column--theatre.right-column--beside .channel-root__right-column > div {
     background-color: transparent!important;
-}
-.tw-root--theme-dark .right-column--theatre .tw-border-l {
     border-left: 1px solid transparent!important;
 }
-/*채팅방 배경있는 채팅 불투명하게*/
-.chat-scrollable-area__message-container > .tw-c-background-alt{
+/*의도는 채팅 기간 지난 클립 채팅창 투명하게 바꾸는 용도*/
+.tw-root--theme-dark .right-column--theatre .video-chat__message-list-wrapper > div > div {
     background-color: transparent!important;
 }
-/*하단여백*/
-.video-player__container--theatre-whispers {
-    bottom: 0rem;
+/*채팅방 배경있는 채팅 불투명하게*/
+.user-notice-line {
+    background-color: transparent!important;
 }
 /*플레이어 전체로 확장*/
 .persistent-player.persistent-player--theatre {
     width: 100%!important;
 }
-/*플레이어 왼쪽 정렬과 가득채우기*/
+/*방송, 광고 영상 왼쪽 정렬과 풀스크린(video and ad video left align & full screen)*/
 div.video-player div.video-player__container--theatre video {
     max-height: 100%!important;
     max-width: 100%;
-    width: auto;
+    width: auto!important;
     height: 100%!important;
     position: absolute;
 }
-
-/*--극장 모드에서 플레이어 내부 우측 여백 생기게 하기--*/
-.video-player__container--theatre-whispers div[data-a-target="player-controls"],
-.video-player__container--theatre-whispers .top-bar {
-    padding-right: 335px!important;
-}
-.video-player__container--theatre-whispers .player-overlay-background-sidebar {
-    width: calc(320px + 335px);
-    padding-right: 335px!important;
-}
-.video-player__container--theatre-whispers .player-overlay-background > .tw-mg-r-2 {
+/*광고 남은 시간(ad countdown)*/
+.video-player__container--theatre div[data-a-target="video-ad-countdown"] {
     margin-right: 360px!important;
+}
+/*--극장 모드에서 플레이어 내부 우측 여백 생기게 하기--*/
+@media screen and (min-width: 920px) {
+    .video-player__container--theatre div[data-a-target="player-controls"],
+    .video-player__container--theatre .top-bar {
+        padding-right: 340px!important;
+    }
+    .video-player__container--theatre .player-overlay-background--sidebar {
+        width: calc(320px + 340px);
+        padding-right: 340px!important;
+    }
+    .video-player__container--theatre .player-overlay-background {
+        padding-right: 360px!important;
+        width: auto!important;
+    }
+    .video-player__container--theatre .other-vods__container {
+        margin-right: 360px!important;
+    }
 }
 /*채널 목록 너비*/
 .side-nav {
@@ -80,7 +113,8 @@ div.video-player div.video-player__container--theatre video {
 /*VOD에서 나의 로그인 아이디*/
 .chat-author__intl-login--highlighted,
 /*리더보드*/
-.channel-leaderboard {
+.channel-leaderboard,
+.last-x-events_container {
     display: none;
 }
 /*VOD 채팅방 상단*/
@@ -89,103 +123,105 @@ div.video-player div.video-player__container--theatre video {
 }
 /*LIVE 채팅방 타임스탬프*/
 span.chat-line__timestamp {
-    display: flex;
-    height: 0px!important;
-    font-size: 13px;
+    font-size: var(--font-size-id);
+    margin-right: 1.2rem;
 }
 /*--채팅 내용 내부--*/
 .tw-root--theme-dark .right-column--theatre .chat-scrollable-area__message-container,
-.tw-root--theme-dark .right-column--theatre .qa-vod-chat{
-    text-shadow:  1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000,  2px 2px 2px #000;
+.tw-root--theme-dark .right-column--theatre .video-chat__message-list-wrapper,
+.tw-root--theme-dark .right-column--theatre .chat-input-tray__open {
+    text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, 2px 2px 2px #000;
+}
+.right-column--theatre.right-column--beside .chat-line__message,
+.right-column--theatre.right-column--beside .chat-line__status,
+.right-column--theatre.right-column--beside .vod-message {
+    text-align: right;
 }
 .chat-line__message,
-.chat-line__status,
+.chat-line__status {
+    font-size: var(--font-size-text);
+}
 .vod-message {
-    text-align: right;
     font-size: 19px;
+    line-height: 1.3;
 }
 /*--채팅 강조하기--*/
 .chat-line__message-body--highlighted {
     border: 0px;
 }
-.channel-points-icon {
-    height: 1.5rem;
-}
-.user-notice-line .tw-mg-t-05 {
-    margin-top: -1rem!important;
-}
-.user-notice-line.tw-pd-y-05 {
-    padding-bottom: .1rem!important;
-    padding-top: .1rem!important;
-}
-/*--vod 타임 스탬프--*/
-.vod-message__header{
-    width:0px;
-    height:0px;
-}
-.right-column--theatre .vod-message__header {
-    display: none!important;
-}
 /*벳지 여백*/
 .chat-badge {
     margin-bottom: 0rem;
 }
-/*이모티콘*/
-.chat-line__message--emote,
-.chat-line__message--emote-button {
-    margin: 0 0 5px 0;
-}
 /*채팅 내용*/
 .text-fragment {
-    font-weight: bold;
-    line-height: 1.25em;
+    font-weight: 550;
+    display: inline;
 }
 /*채팅 간격*/
 .chat-line__message,
 .chat-line__moderation,
 .chat-line__status {
-    padding: .2rem 2rem .2rem 1rem;
+    padding: .2rem 1.7rem;
+}
+.vod-message {
+    padding: .2rem 1.7rem!important;
 }
 /*닉네임*/
 .chat-author__display-name,
 .chat-author__intl-login {
+    font-size: var(--font-size-id);
+}
+.video-chat__message-author {
     font-size: 15px;
-    line-height: 1.5em;
 }
 /*ID와 채팅 사이 줄 바꾸기*/
-.vod-message .video-chat__message .tw-pd-r-05::after,
+.video-chat__message-author::after,
 .chat-line__no-background > span[data-test-selector="chat-message-separator"]::after {
     white-space: pre;
     font-size: 0px;
     content: "\A";
 }
-.vod-message .video-chat__message .tw-pd-r-05,
-.chat-line__no-background > span[data-test-selector="chat-message-separator"]{
+/*":" 지우기*/
+.video-chat__message > :first-child {
+    display: none;
+}
+.vod-message--user-notice .video-chat__message > :first-child {
+    display: inline;
+    /* 구독메시지 예외*/
+}
+.chat-line__no-background > span[data-test-selector="chat-message-separator"] {
     font-size: 0px;
-    line-height: 1em;
 }
 /*누가 나 부름*/
 .right-column--theatre .mention-fragment--recipient {
     text-shadow: none;
+}
+/*vod 타임 스탬프*/
+.vod-message__header {
+    height: 0px!important;
+    text-align: right;
+    display: block!important;
+}
+.vod-message--timestamp {
+    display: block !important
+}
+.right-column--theatre.right-column--beside .vod-message__header,
+.video-chat__message-menu {
+    display: none!important;
 }
 /*----툴팁 관련----*/
 .tw-tooltip {
     text-shadow: none;
     color: var(--color-text-tooltip);
 }
-/*LIVE 배지 툴팁*/
-div.tw-tooltip__container[data-a-target="chat-badge"] > .tw-tooltip,
-/*VOD 배지 툴팁*/
-div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip {
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 0.1rem!important;
+/*VOD 타임 스탬프 툴팁*/
+.vod-message__header > div > div > .tw-tooltip {
+    left: 0;
+    transform: translateX(calc(-61%));
 }
-/*LIVE 배지 툴팁:after*/
-div.tw-tooltip__container[data-a-target="chat-badge"] > .tw-tooltip:after,
-/*VOD 배지 툴팁:after*/
-div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip:after {
-    left: 47%;
+.vod-message__header > div > div > .tw-tooltip::after {
+    left: calc(80%);
 }
 /*생방송 채팅창 상단*/
 .right-column--theatre .stream-chat-header {
@@ -197,7 +233,8 @@ div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip:
     top: 0rem;
 }
 /*--채팅창 입력 칸--*/
-.tw-root--theme-dark .chat-input .tw-textarea {
+.tw-root--theme-dark .chat-input .tw-textarea,
+.tw-root--theme-dark .chat-wysiwyg-input__editor {
     background-color: rgba(25, 23, 28, 0.4) !important;
     font-size: 14px !important;
     padding-bottom: 0.4rem !important;
@@ -205,34 +242,111 @@ div.vod-message > div > div > div > span > div.tw-tooltip-wrapper > .tw-tooltip:
     padding-top: 0.4rem !important;
     padding-right: 0.7rem !important;
 }
-.chat-room .tw-pd-x-2{
-    padding-left: 1rem!important;
-    padding-right: 1rem!important;
-}
-.chat-room .tw-pd-b-2 {
-    padding-bottom: 1rem!important;
-}
-.chat-input .tw-mg-t-1{
-    margin-top: .5rem!important;
-}
-div.chat-input.tw-block.tw-pd-b-1.tw-pd-x-1.nc-dark{
-    padding-bottom: 0.6rem!important;
-}
 /*채팅 입력칸 버튼 하단으로*/
-div.chat-input div.tw-absolute.tw-bottom-0.tw-right-0{
-    right: 100px!important;
-    bottom: -40px!important;
+.chat-input__input-icons {
+    position: fixed;
+    bottom: 4px;
+    right: 110px;
 }
 /*채팅 아이디 창*/
-.chat-input__badge-carousel .tw-balloon{
-    margin-right: 3.5rem!important;
-}
 .chat-input__badge-carousel {
     padding-left: .3rem;
     padding-top: .2rem;
 }
-/*세로로 유 튜 브 트 위 터, 투 표 수정*/
-.custom-prediction-button__interactive,
-.social-media-link-overflow{
-    width: max-content;
+/*LIVE 이모티콘 간격*/
+.chat-line__message--emote,
+.chat-line__message--emote-button {
+    margin: 0 var(--margin-emote) 0 var(--margin-emote);
+}
+/*vod 이모티콘*/
+.video-chat .chat-image__container {
+    margin: -0.3rem -0.22rem 0.3rem -0.22rem;
+}
+/*잘 안보이는 트위치 기본 닉네임 컬러 수정*/
+.tw-root--theme-dark span[style='color: rgb(255, 0, 0);'] {
+    color: #ff5f5f!important;
+}
+.tw-root--theme-dark span[style='color: rgb(0, 0, 255);'] {
+    color: #8181ff!important;
+}
+.tw-root--theme-dark span[style='color: rgb(0, 128, 0);'] {
+    color: #81b081!important;
+}
+.tw-root--theme-dark span[style='color: rgb(178, 34, 34);'] {
+    color: #d68484!important;
+}
+.tw-root--theme-dark span[style='color: rgb(255, 127, 80);'] {
+    color: #ffb094!important;
+}
+.tw-root--theme-dark span[style='color: rgb(154, 205, 50);'] {
+    color: #c3ec88!important;
+}
+.tw-root--theme-dark span[style='color: rgb(255, 69, 0);'] {
+    color: #ff9e91!important;
+}
+.tw-root--theme-dark span[style='color: rgb(46, 139, 87);'] {
+    color: #87b898!important;
+}
+.tw-root--theme-dark span[style='color: rgb(218, 165, 32);'] {
+    color: #f7cc84!important;
+}
+.tw-root--theme-dark span[style='color: rgb(210, 105, 30);'] {
+    color: #f0a284!important;
+}
+.tw-root--theme-dark span[style='color: rgb(95, 158, 160);'] {
+    color: #9cc6c8!important;
+}
+.tw-root--theme-dark span[style='color: rgb(30, 144, 255);'] {
+    color: #84bcff!important;
+}
+.tw-root--theme-dark span[style='color: rgb(255, 105, 180);'] {
+    color: #ffa2d7!important;
+}
+.tw-root--theme-dark span[style='color: rgb(138, 43, 226);'] {
+    color: #b787fe!important;
+}
+.tw-root--theme-dark span[style='color: rgb(0, 255, 127);'] {
+    color: #81ffb0!important;
+}
+/*채팅창 위 구독 기념일 알림*/
+.chat-input .pinned-callout {
+    background-color: transparent!important;
+}
+/*팔로우 전용 채널 채팅 입력칸*/
+.tw-root--theme-dark .right-column--theatre.right-column--beside .chat-input-tray__open {
+    background-color: transparent !important;
+    border-top: transparent!important;
+    border-right: transparent!important;
+    border-bottom: transparent!important;
+    border-left: transparent!important;
+}
+.tw-root--theme-dark .right-column--theatre.right-column--beside .chat-input-container__open {
+    background-color: transparent!important;
+}
+/*클립 제목 너무 길 때*/
+.chat-card {
+    text-align: left;
+}
+p[data-test-selector="chat-card-title"],
+p[data-test-selector="chat-card-description"] {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(200px);
+}
+.right-column--theatre.right-column--below p[data-test-selector="chat-card-title"],
+.right-column--theatre.right-column--below p[data-test-selector="chat-card-description"] {
+    /*세로모드는 따로 처리*/
+    width: calc(100vw - 14rem);
+}
+/* 디시콘 유저스크립트 협업 */
+.dccon-image {
+    text-shadow: initial;
+    margin-left: 0;
+    margin-right: auto;
+}
+.right-column--theatre.right-column--beside .chat-line__message .dccon-image {
+    margin-left: auto;
+    margin-right: 0;
 }
